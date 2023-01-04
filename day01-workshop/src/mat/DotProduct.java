@@ -24,21 +24,24 @@ public class DotProduct {
 		for (int i = 0; i < rows; i++) {
 			input = cons.readLine("Row %d, %d values: ", i, cols);
 			values = input.trim().split(" ");
-			for (int j = 0; j < cols; j++)
+			for (int j = 0; j < cols; j++) {
 				data[i][j] = Integer.parseInt(values[j]);
+			}
 		}
 
 		// Read the weights
 		input = cons.readLine("Weights: %d: ", cols);
 		values = input.trim().split(" ");
-		for (int i = 0; i < cols; i++)
-				weights[i] = Integer.parseInt(values[i]);
+		for (int i = 0; i < cols; i++) {
+			weights[i] = Integer.parseInt(values[i]);
+		}
 
 		// Perform the dot product
 		for (int i = 0; i < rows; i++) {
 			int total = 0;
-			for (int j = 0; j < cols; j++)
+			for (int j = 0; j < cols; j++) {
 				total = total + (data[i][j] * weights[j]);
+			}
 			result[i] = total;
 		}
 
