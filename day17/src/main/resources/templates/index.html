@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+
+        <h1>My Shopping Cart</h1>
+
+        <form method="POST" action="/cart">
+
+            <div>
+                <input type="text" name="name" size="30" placeholder="Your name" 
+                        data-th-value="${name}">
+            </div>
+
+            <div>
+                <input type="text" name="item" size="30" placeholder="Your item">
+            </div>
+            <div>
+                <button type="submit">Add to Cart</button>
+            </div>
+
+        </form>
+
+        <ul>
+            <li data-th-each="i: ${cart}">
+                <span data-th-text="${i}"></span>
+            </li>
+        </ul>
+        
+    </body>
+</html>
