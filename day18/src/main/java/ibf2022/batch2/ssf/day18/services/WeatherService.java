@@ -1,5 +1,8 @@
 package ibf2022.batch2.ssf.day18.services;
 
+import java.io.StringReader;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -9,6 +12,12 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import ibf2022.batch2.ssf.day18.models.Weather;
+import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
+
 @Service
 public class WeatherService {
 
@@ -17,7 +26,7 @@ public class WeatherService {
 	@Value("${weathermap.key}")
 	private String apiKey;
 
-	public void getWeather(String city) {
+	public Optional<Weather> getWeather(String city) {
 
 		// Build the URL
 		String url = UriComponentsBuilder.fromUriString(URL)
@@ -37,8 +46,8 @@ public class WeatherService {
 
 		ResponseEntity<String> resp = null;
 
-		String payload;
-		int statusCode;
+		String payload = "";
+		int statusCode = 500;
 		try {
 			resp = template.exchange(req, String.class);
 			payload = resp.getBody();
@@ -48,9 +57,39 @@ public class WeatherService {
 			payload = ex.getResponseBodyAsString();
 			//statusCode = ex.getRawStatusCode();
 			statusCode = ex.getStatusCode().value();
+			return Optional.empty();
+		} finally {
+			System.out.printf(">>> status code: %d\n", statusCode);
+			System.out.printf(">>> payload: \n%s\n", payload);
 		}
 
-		System.out.printf(">>> status code: %d\n", statusCode);
-		System.out.printf(">>> payload: \n%s\n", payload);
+		Weather weather = new Weather();
+		weather.setCity(city);
+
+		// Parse the result to Weather
+		JsonReader reader = Json.createReader(new StringReader(payload));
+		JsonObject weatherJson = reader.readObject();
+		JsonObject jo = weatherJson.getJsonObject("coord");
+
+		// Set the lat and lng
+		float floatValue = (float)jo.getJsonNumber("lon").doubleValue();
+		weather.setLongitude(floatValue);
+		floatValue = (float)jo.getJsonNumber("lat").doubleValue();
+		weather.setLatitude(floatValue);
+
+		// Read weather
+		JsonArray arr = weatherJson.getJsonArray("weather");
+		for (int i = 0; i < arr.size(); i++) {
+			jo = arr.getJsonObject(i);
+			String desc = "%s - %s".formatted(
+				jo.getString("main"), jo.getString("description"));
+			weather.addDescription(desc);
+		}
+
+		// Get the country
+		jo = weatherJson.getJsonObject("sys");
+		weather.setCountry(jo.getString("country").toLowerCase());
+
+		return Optional.of(weather);
 	}
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+	<body>
+
+		<h1>
+			Weather for <span data-th-text="${weather.city}"></span> 
+			<img data-th-src="@{https://countryflagsapi.com/png/{c}(c=${weather.country})}" width="100" crossorigin="anonymous"> 
+		</h1>
+
+		<h4 data-th-each="desc: ${weather.description}">
+			<span data-th-text="${desc}"></span>
+		</h4>
+
+		<h4><a data-th-href="@{/}">Back</a></h4>
+		
+	</body>
+</html>

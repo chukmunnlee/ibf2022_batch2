@@ -28,7 +28,7 @@ public class Day18Application implements CommandLineRunner {
 		//httpBinSvc.post("fred", "fred@gmail.com");
 		//httpBinSvc.postAsJson("fred", "fred@gmail.com");
 		//
-		weatherSvc.getWeather("Tokyo");
+		//weatherSvc.getWeather("Tokyo");
 	}
 
 }
