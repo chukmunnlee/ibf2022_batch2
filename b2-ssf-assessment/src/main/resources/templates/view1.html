@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>View 1</title>
+	</head>
+	<body>
+		<!--
+			Feel free to make changes to this HTML but do no change the option in select
+		-->
+
+		<h1>Shopping Cart</h1>
+
+		<form method="POST" data-th-action="@{/item}" data-th-object="${item}">
+
+			<table>
+				<tr>
+					<td>Item:</td>
+					<td>
+						<select name="item" data-th-field="*{item}">
+							<option value="apple">Apple</option>
+							<option value="orange">Orange</option>
+							<option value="bread">Bread</option>
+							<option value="cheese">Cheese</option>
+							<option value="chicken">Chicken</option>
+							<option value="mineral_water">Mineral Water</option>
+							<option value="instant_noodles">Instant Noodles</option>
+						</select>
+						<div data-th-if="${#fields.hasErrors('item')}">
+							<span data-th-errors="*{item}"></span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>Quantity:</td>
+					<td>
+						<input type="number" name="quantity" size="4" placeholder="Quantity" data-th-field="*{quantity}">
+						<div data-th-if="${#fields.hasErrors('quantity')}">
+							<span data-th-errors="*{quantity}"></span>
+						</div>
+					</td>
+				</tr>
+			</table>
+
+			<div style="margin-top: 2vh; margin-botton: 2vh;" data-th-if="${#lists.isEmpty(order.contents)}">
+				<h2>Your cart is currently empty</h2>
+			</div>
+
+			<table border="1" style="margin-top: 2vh; margin-bottom: 2vh;"
+						data-th-unless="${#lists.isEmpty(order.contents)}">
+				<thead>
+					<tr>
+						<th>Item</th>
+						<th>Quantity</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="i: ${order.contents}">
+						<td><span data-th-text="${i.item}"></span></td>
+						<td><span data-th-text="${i.quantity}"></span></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div>
+				<button type="submit">Add</button>
+				<button type="submit" formmethod="GET" data-th-formaction="@{/shippingaddress}">
+					Next
+				</button>
+			</div>
+		</form>
+		
+	</body>
+</html>

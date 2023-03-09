@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Shipping Address</title>
+	</head>
+	<body>
+
+		<h1>Shipping Address</h1>
+
+		<form method="POST" data-th-action="@{/checkout}" data-th-object="${shippingAddress}">
+			<table>
+				<tr>
+					<td>Name:</td>
+					<td>
+						<input type="text" name="name" size="30" placeholder="Your name" 
+							data-th-field="*{name}">
+						<div data-th-if="${#fields.hasErrors('name')}">
+							<span data-th-errors="*{name}"></span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>Address:</td>
+					<td>
+						<input type="text" name="address" size="30" placeholder="Address to ship the order to"
+							data-th-field="*{address}">
+						<div data-th-if="${#fields.hasErrors('address')}">
+							<span data-th-errors="*{address}"></span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<button type="submit" formmethod="GET" data-th-formaction="@{/}">Back</button>
+						<button type="submit">Checkout</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+
+		<div data-th-unless="${null == error}">
+			<div>Error</div>
+			<code data-th-text="${error}"></code>
+		</div>
+		
+	</body>
+</html>
