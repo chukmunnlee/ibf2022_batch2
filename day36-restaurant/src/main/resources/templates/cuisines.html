@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Cuisines</title>
+	</head>
+	<body>
+
+		<h2>List of Cuisines</h2>
+
+		<form method="GET" data-th-action="@{/cuisines}">
+
+			<h4>Cuisines</h4>
+			<select name="cuisine">
+				<option data-th-each="c: ${cuisines}" data-th-value="${c}" data-th-text="${c}">
+				</option>
+			</select>
+
+			<button type="submit">GET</button>
+
+		</form>
+		
+		<hr>
+
+		<ul>
+			<li data-th-each="c: ${cuisines}">
+				<a data-th-href="@{/{cuisine}/restaurants(cuisine=${c})}">
+					<code data-th-text="${c}"></code>
+				</a>
+			</li>
+		</ul>
+
+		
+	</body>
+</html>

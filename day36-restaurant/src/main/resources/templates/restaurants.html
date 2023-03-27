@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+	<body>
+
+		<h1>List of <span data-th-text="${cuisine}"></span> Restaurants</h1>
+
+		<ul>
+			<li data-th-each="r: ${restaurants}" data-th-object="${r}">
+				<h3 data-th-text="*{name}"></h3>
+				<p data-th-text="*{address}"></p>
+				<p>Rating: <i data-th-text="*{rating}"></i></p>
+			</li>
+		</ul>
+
+		<h4>
+			<a data-th-href="@{/}">Back</a>
+		</h4>
+
+	</body>
+</html>
