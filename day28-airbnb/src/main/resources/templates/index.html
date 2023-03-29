@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+	<body>
+
+		<h1>Airbnb Search</h1>
+
+		<form method="GET" action="/search">
+			<div>
+				<input type="text" name="searchTerms" size="40" 
+						placeholder="Search terms" required>
+			</div>
+			<div>
+				<select name="country">
+					<option data-th-each="c: ${countries}" 
+							  data-th-value="${c}" data-th-text="${c}"></option>
+				</select>
+			</div>
+			<button type="submit">Search</button>
+		</form>
+		
+	</body>
+</html>

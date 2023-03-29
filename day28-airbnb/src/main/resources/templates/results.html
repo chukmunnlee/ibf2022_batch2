@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Results</title>
+	</head>
+	<body>
+
+		<h2>Search Results</h2>
+
+		<ul>
+			<li data-th-each="n: ${names}">
+				<code data-th-text="${n}"></code>
+			</li>
+		</ul>
+		
+	</body>
+</html>
