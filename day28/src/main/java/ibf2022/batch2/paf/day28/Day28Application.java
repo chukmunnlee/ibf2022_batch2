@@ -21,7 +21,9 @@ public class Day28Application implements CommandLineRunner {
 	public void run(String... args) {
 
 		//tvshowRepo.findTvShowsByType("Animation");
-		tvshowRepo.groupShowsByTimezone();
+		//tvshowRepo.groupShowsByTimezone();
+		//tvshowRepo.summarizeTvShows("scripted");
+		tvshowRepo.showCategories();
 	}
 
 }
