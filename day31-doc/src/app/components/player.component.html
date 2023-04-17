@@ -1,0 +1,6 @@
+<h2>{{ name | titlecase }}'s Hand</h2>
+
+<div>
+  <img *ngFor="let c of hand"
+    src="/assets/images/{{ c.suit | titlecase }}/card_{{ c.imageIdx }}_{{ c.suit }}.png" alt="">
+</div>
