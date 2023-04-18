@@ -1,0 +1,57 @@
+
+<form [formGroup]="doForm" (ngSubmit)="processDelivery()">
+
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td>
+        <input type="text" size="30" formControlName="name">
+      </td>
+    </tr>
+    <tr>
+      <td>Address:</td>
+      <td>
+        <input type="text" size="30" formControlName="address">
+      </td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td>
+        <input type="email" size="30" formControlName="email">
+      </td>
+    </tr>
+    <tr>
+      <td>Delivery Date:</td>
+      <td>
+        <input type="date" size="30" formControlName="deliveryDate">
+      </td>
+    </tr>
+    <tr>
+      <td>Session:</td>
+      <td>
+        AM <input type="radio" name="session" value="AM">
+        PM <input type="radio" name="session" value="PM">
+      </td>
+    </tr>
+    <tr>
+      <td>Options:</td>
+      <td>
+        Insurance <input type="checkbox" value="insurance">
+        Priority <input type="checkbox" value="priority">
+      </td>
+    </tr>
+    <tr>
+      <td>Comments:</td>
+      <td>
+        <textarea cols="30" rows="3" formControlName="comments"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button type="submit">Place Order</button>
+      </td>
+    </tr>
+  </table>
+
+</form>
