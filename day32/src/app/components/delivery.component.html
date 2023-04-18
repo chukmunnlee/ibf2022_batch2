@@ -1,4 +1,3 @@
-
 <form [formGroup]="doForm" (ngSubmit)="processDelivery()">
 
   <table>
@@ -6,12 +5,18 @@
       <td>Name:</td>
       <td>
         <input type="text" size="30" formControlName="name">
+        <span *ngIf="hasError('name')">
+          Please enter your name
+        </span>
       </td>
     </tr>
     <tr>
       <td>Address:</td>
       <td>
         <input type="text" size="30" formControlName="address">
+        <span *ngIf="hasError('address')">
+          Please enter your address
+        </span>
       </td>
     </tr>
     <tr>
@@ -29,15 +34,15 @@
     <tr>
       <td>Session:</td>
       <td>
-        AM <input type="radio" name="session" value="AM">
-        PM <input type="radio" name="session" value="PM">
+        AM <input type="radio" value="AM" formControlName="session">
+        PM <input type="radio" name="session" value="PM" formControlName="session">
       </td>
     </tr>
     <tr>
       <td>Options:</td>
       <td>
-        Insurance <input type="checkbox" value="insurance">
-        Priority <input type="checkbox" value="priority">
+        Insurance <input type="checkbox" formControlName="insurance">
+        Priority <input type="checkbox" [formControlName]="priorityCtrlName">
       </td>
     </tr>
     <tr>
@@ -46,12 +51,49 @@
         <textarea cols="30" rows="3" formControlName="comments"></textarea>
       </td>
     </tr>
+    <!--
     <tr>
       <td></td>
       <td>
-        <button type="submit">Place Order</button>
+        <p>
+          Invalid: {{ doForm.invalid }}, Valid: {{ doForm.valid }}
+        </p>
+        <p>
+          Pristine: {{ doForm.pristine }}, Dirty: {{ doForm.dirty }}
+        </p>
+      </td>
+    </tr>
+  -->
+    <tr>
+      <td></td>
+      <td>
+        <button type="submit" [disabled]="isFormInvalid()">
+          Place Order
+        </button>
+        <button type="button" (click)="addItem()">Add Item</button>
       </td>
     </tr>
   </table>
 
+  <div *ngIf="itemArray.length > 0; else noItems">
+    <h2>Items</h2>
+    <table formArrayName="orderItems">
+      <tr *ngFor="let it of itemArray.controls; let i = index" [formGroupName]="i">
+        <td>
+          <input type="text" size="30" placeholder="Item" formControlName="item">
+        </td>
+        <td>
+          <input type="number" size="5" placeholder="Quantity" formControlName="quantity">
+        </td>
+        <td>
+          <button (click)="deleteItem(i)">X</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
 </form>
+
+<ng-template #noItems>
+  <h2> Your order has no items </h2>
+</ng-template>
