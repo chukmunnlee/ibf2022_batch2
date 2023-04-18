@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Card, DeckOfCards } from './models';
+import { Card, DeckOfCards, Player } from './models';
+
+const NAMES = ['fred', 'barney', 'betty']
 
 
 @Component({
@@ -9,14 +11,31 @@ import { Card, DeckOfCards } from './models';
 })
 export class AppComponent {
 
-  players = ['fred', 'barney', 'betty']
+  players: Player[] = []
 
-  playerHand: Card[] = []
+  deckOfCards = new DeckOfCards()
+  currentPlayer = NAMES[0]
 
-  newCard(card: Card | undefined) {
-    console.info(">>>> c: ", card)
+  constructor() {
+    this.deckOfCards.shuffle()
+    for (let n of NAMES) {
+      this.players.push({
+        name: n,
+        hand: []
+      })
+    }
+  }
+
+  drawCardForPlayer(name: string) {
+    this.currentPlayer = name
+    const c = this.deckOfCards.take()
+    console.info(`>> drawCardForPlayer: ${name}, card: ${JSON.stringify(c)}`)
+    const p = this.players.find(p => p.name == name)
     // @ts-ignore
-    this.playerHand.push(card)
+    p?.hand.push(c)
+  }
 
+  newCard() {
+    this.drawCardForPlayer(this.currentPlayer)
   }
 }

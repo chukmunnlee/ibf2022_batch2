@@ -1,6 +1,8 @@
-<h2>{{ name | titlecase }}'s Hand</h2>
+<div (click)="drawACard()">
+  <h2>{{ player.name | titlecase }}'s Hand</h2>
 
-<div>
-  <img *ngFor="let c of hand"
-    src="/assets/images/{{ c.suit | titlecase }}/card_{{ c.imageIdx }}_{{ c.suit }}.png" alt="">
+  <div>
+    <img *ngFor="let c of player.hand"
+      src="/assets/images/{{ c.suit | titlecase }}/card_{{ c.imageIdx }}_{{ c.suit }}.png" alt="">
+  </div>
 </div>

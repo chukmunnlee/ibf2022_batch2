@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { Card, DeckOfCards } from '../models';
@@ -10,9 +10,11 @@ import { Card, DeckOfCards } from '../models';
 })
 export class DeckOfCardsComponent {
 
+  @Input()
+  remainingCards = 0
 
   @Output()
-  onCardSelection = new Subject<Card | undefined>()
+  onCardSelection = new Subject<void>()
 
   cards: DeckOfCards
 
@@ -22,9 +24,7 @@ export class DeckOfCardsComponent {
   }
 
   take() {
-    const c = this.cards.take()
-    console.info('>>> taken: ', c)
-    this.onCardSelection.next(c)
+    this.onCardSelection.next()
   }
 
 }

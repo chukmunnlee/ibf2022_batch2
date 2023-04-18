@@ -4,6 +4,11 @@ export interface Card {
   name: string
 }
 
+export interface Player {
+  name: string
+  hand: Card[]
+}
+
 const SUIT = [
   "clover", "diamond", "heart", "spade"
 ]

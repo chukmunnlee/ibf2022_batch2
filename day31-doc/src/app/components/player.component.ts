@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { Card } from '../models';
+import { Component, Input, Output } from '@angular/core';
+import { Card, Player } from '../models';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-player',
@@ -9,9 +10,14 @@ import { Card } from '../models';
 export class PlayerComponent {
 
   @Input()
-  name = "fred"
+  player!: Player
 
-  @Input()
-  hand: Card[] = []
+  @Output()
+  onDrawCard = new Subject<string>()
+
+  drawACard() {
+    console.info(`name: ${this.player.name}`)
+    this.onDrawCard.next(this.player.name)
+  }
 
 }
