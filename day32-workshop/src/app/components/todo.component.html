@@ -1,0 +1,62 @@
+
+<h2>Todo</h2>
+
+<form [formGroup]="todoForm" (ngSubmit)="processTodo()">
+
+  <table>
+    <tr>
+      <td>Name</td>
+      <td>
+        <input type="text" size="30" placeholder="Your name" formControlName="name">
+      </td>
+    </tr>
+    <tr>
+      <td>Due Date:</td>
+      <td>
+        <input type="datetime-local" size="30" placeholder="Due Date" formControlName="dueDate">
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button type="submit" [disabled]="invalid()">Save</button>
+        <button type="button" (click)="addTask()">Add Task</button>
+      </td>
+    </tr>
+  </table>
+
+  <hr>
+
+  <div *ngIf="taskArray.length > 0; else bornFree">
+    <table>
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Priority</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="tasks">
+        <tr *ngFor="let t of taskArray.controls; let i = index" [formGroupName]="i">
+          <td>
+            <input type="text" size="40" placeholder="Task description" formControlName="description">
+          </td>
+          <td>
+            <select formControlName="priority">
+              <option value="lo">LOW</option>
+              <option value="md">MEDIUM</option>
+              <option value="hi">HIGH</option>
+            </select>
+          </td>
+          <td>
+            <button type="button" (click)="removeTask(i)">X</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</form>
+
+<ng-template #bornFree>
+  <h3> You are born free!  </h3>
+</ng-template>
