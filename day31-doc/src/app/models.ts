@@ -49,6 +49,6 @@ export class DeckOfCards {
   }
 
   private randNum(size = 52): number {
-    return Math.floor((Math.random() * size) + 1)
+    return Math.floor((Math.random() * size))
   }
 }
