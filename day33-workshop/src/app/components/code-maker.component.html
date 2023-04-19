@@ -1,0 +1,13 @@
+
+<div>
+	<div *ngIf="revalCode; else codeSet">
+		<span *ngFor="let c of codes" class="code">
+			<code>{{ c }}</code>
+		</span>
+	</div>
+	<button type="button" (click)="showCodes()">Reveal</button>
+</div>
+
+<ng-template #codeSet>
+	<h2>Code has been set</h2>
+</ng-template>

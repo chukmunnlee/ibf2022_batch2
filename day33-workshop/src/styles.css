@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+.code {
+	padding: 4px;
+	margin: 4px;
+	font-size: 1.2em;
+}

@@ -1,0 +1,49 @@
+
+<h2>Guess the Colours</h2>
+
+<form [formGroup]="form">
+	<table>
+		<tr> 
+			<td>
+				1
+			</td>
+			<td>
+				<select formControlName="colour0">
+					<option *ngFor="let c of COLOURS; let ci = index" [value]="ci">
+						{{ c }}
+					</option>
+				</select>
+			</td>
+			<td>
+				<select formControlName="colour1">
+					<option *ngFor="let c of COLOURS; let ci = index" [value]="ci">
+						{{ c }}
+					</option>
+				</select>
+			</td>
+			<td>
+				<select formControlName="colour2">
+					<option *ngFor="let c of COLOURS; let ci = index" [value]="ci">
+						{{ c }}
+					</option>
+				</select>
+			</td>
+			<td>
+				<select formControlName="colour3">
+					<option *ngFor="let c of COLOURS; let ci = index" [value]="ci">
+						{{ c }}
+					</option>
+				</select>
+			</td>
+				<ng-content></ng-content>
+			<td>
+			</td>
+		</tr>
+		<tr *ngFor="let row of guesses; let i = index">
+			<td>{{ i + 2 }}</td>
+			<td *ngFor="let gr of row">
+				<span class="code">{{ gr }}</span>
+			</td>
+		</tr>
+	</table>
+</form>
