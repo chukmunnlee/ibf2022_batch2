@@ -16,6 +16,8 @@ export class FriendsComponent implements OnInit, OnChanges {
   @Input()
   friend!: Friend
 
+  readOnly = false
+
   form!: FormGroup
 
   get value(): Friend {
@@ -23,7 +25,7 @@ export class FriendsComponent implements OnInit, OnChanges {
   }
   set value(f: Friend) {
     console.info('>>> set value: ', f)
-    this.initForm()
+    this.initForm(f)
   }
 
   constructor(private fb: FormBuilder) { }
@@ -36,18 +38,18 @@ export class FriendsComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const fr = changes['friend'].currentValue as Friend
     console.info('******* changes: ', changes)
-    this.form = this.createForm(fr)
+    this.initForm(fr)
   }
 
   initForm(friend: Friend | null = null) {
     this.form = this.createForm(friend)
+    this.readOnly = true
     /*
     this.form.statusChanges.subscribe(
       v => {
         console.info('status changes: ', v)
       }
     )
-    */
     this.form.valueChanges
       .pipe(
         debounceTime(300)
@@ -57,10 +59,11 @@ export class FriendsComponent implements OnInit, OnChanges {
         console.info('value changes: ', v['name'])
       }
     )
+    */
   }
 
   clear() {
-    this.form = this.createForm()
+    this.initForm()
   }
 
   // value(): Friend {

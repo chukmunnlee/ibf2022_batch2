@@ -2,6 +2,7 @@
 
 <app-friends (onFriend)="process($event)" [friend]="selectedFriend">
   <div *ngIf="updateMode; else add">
+    <button type="button" (click)="clear()">Clear</button>
     <button type="submit">Update</button>
     <button type="button" (click)="unFriend()">Delete</button>
   </div>

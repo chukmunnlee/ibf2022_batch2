@@ -58,12 +58,18 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.friends[idx] = friend
   }
 
+  clear() {
+    this.friendComp.clear()
+    this.updateMode = false
+  }
+
   selection(name: string) {
     console.info(">>> selected friend: ", name)
     const fr = this.friends.find(f => f.name == name)
     // @ts-ignore
-    //this.selectedFriend = fr
-    this.friendComp.value = fr
+    this.selectedFriend = fr
+    //this.friendComp.value = fr
     this.updateMode = true
+    this.friendComp.readOnly = true
   }
 }
