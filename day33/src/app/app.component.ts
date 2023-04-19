@@ -68,7 +68,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     const fr = this.friends.find(f => f.name == name)
     // @ts-ignore
     this.selectedFriend = fr
-    //this.friendComp.value = fr
+    // @ts-ignore
+    this.friendComp.value = fr
     this.updateMode = true
     this.friendComp.readOnly = true
   }

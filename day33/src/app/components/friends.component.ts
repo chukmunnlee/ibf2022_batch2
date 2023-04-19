@@ -36,9 +36,9 @@ export class FriendsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const fr = changes['friend'].currentValue as Friend
-    console.info('******* changes: ', changes)
-    this.initForm(fr)
+    // const fr = changes['friend'].currentValue as Friend
+    // console.info('******* changes: ', changes)
+    // this.initForm(fr)
   }
 
   initForm(friend: Friend | null = null) {
