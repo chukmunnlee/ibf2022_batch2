@@ -1,0 +1,14 @@
+<h2>Friends List</h2>
+
+<div *ngIf="friendsList.length > 0; else lonely">
+
+  <div *ngFor="let f of friendsList; let i = index"
+      (click)="selection(f.name)" class="highlight">
+    <code>{{ f.name | titlecase }}</code>
+  </div>
+
+</div>
+
+<ng-template #lonely>
+  <h2>Make some friends</h2>
+</ng-template>

@@ -1,0 +1,9 @@
+<h1>Friends App</h1>
+
+<app-friends (onFriend)="process($event)" [friend]="selectedFriend"></app-friends>
+
+<hr>
+
+<app-friends-list [friendsList]="friends" (onSelectedFriend)="selection($event)">
+</app-friends-list>
+
