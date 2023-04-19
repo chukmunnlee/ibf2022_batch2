@@ -1,9 +1,18 @@
 <h1>Friends App</h1>
 
-<app-friends (onFriend)="process($event)" [friend]="selectedFriend"></app-friends>
+<app-friends (onFriend)="process($event)" [friend]="selectedFriend">
+  <div *ngIf="updateMode; else add">
+    <button type="submit">Update</button>
+    <button type="button" (click)="unFriend()">Delete</button>
+  </div>
+</app-friends>
 
 <hr>
 
 <app-friends-list [friendsList]="friends" (onSelectedFriend)="selection($event)">
 </app-friends-list>
+
+<ng-template #add>
+  <button type="submit">Add</button>
+</ng-template>
 

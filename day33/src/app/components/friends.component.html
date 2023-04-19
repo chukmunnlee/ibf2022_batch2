@@ -24,7 +24,10 @@
     <tr>
       <td></td>
       <td>
-        <button type="submit" [disabled]="form.invalid"> Add </button>
+        <ng-content></ng-content>
+        <!--
+          <button type="submit" [disabled]="form.invalid"> Add </button>
+        -->
       </td>
     </tr>
   </table>
