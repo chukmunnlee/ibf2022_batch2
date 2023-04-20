@@ -1,0 +1,39 @@
+<h2>Headline News</h2>
+
+<div *ngIf="country$ | async ;else waiting ">
+  <form [formGroup]="newsForm" (ngSubmit)="getNews()">
+    <table>
+      <tr>
+        <td>Country</td>
+        <td>
+          <select formControlName="country" (change)="onSelectedCountry($event)">
+            <option *ngFor="let c of countryList" [value]="c.code">
+              {{ c.name | titlecase}}
+            </option>
+          </select>
+          {{ flag }}
+        </td>
+      </tr>
+      <tr>
+        <td>Categories</td>
+        <td>
+          <select formControlName="category">
+            <option *ngFor="let c of categories" [value]="c">{{ c | titlecase }}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <button type="submit" [disabled]="newsForm.invalid">
+            Get News
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+
+<ng-template #waiting>
+  <h1>Please Wait</h1>
+</ng-template>
