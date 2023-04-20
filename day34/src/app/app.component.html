@@ -1,0 +1,38 @@
+
+<form [formGroup]="form" (ngSubmit)="getWeatherWithPromise2()">
+  <label for="city">City name:</label>
+  <input type="text" id="city" size="30" formControlName="city">
+  <button type="submit" [disabled]="form.invalid">
+    Get Weather
+  </button>
+</form>
+
+<div>
+  <!-- <code>{{ result | json }}</code> -->
+  <!-- <code>{{ weatherObs$ | async | json }}</code> -->
+
+  <table *ngIf="weatherProm$ | async as weather" border="1">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Temperature</th>
+        <th>Icon</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr *ngFor="let w of weatherProm$ | async"> -->
+      <tr *ngFor="let w of weather">
+        <td>
+          {{ w.main }} - {{ w.description }}
+        </td>
+        <td>
+          {{ w.temperature }}
+        </td>
+        <td>
+          <img src="https://openweathermap.org/img/wn/{{ w.icon }}@2x.png" >
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
