@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { UppercaseResponse } from '../models';
 
-const URL = "http://localhost:8080/uppercase"
+const URL = "http://localhost:8080/api/uppercase"
 
 @Injectable()
 export class UppercaseService {
