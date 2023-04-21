@@ -10,3 +10,7 @@ export const CATEGORIES = [
 ]
 
 export const COUNTRIES_API = 'https://restcountries.com/v3.1/alpha'
+export const NEWS_TOP_HEADLINES_API = 'https://newsapi.org/v2/top-headlines'
+
+// TODO: redact this
+export const NEWS_API_KEY = '__YOUR_API_KEY_HERE__'

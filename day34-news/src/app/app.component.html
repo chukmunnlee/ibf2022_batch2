@@ -34,6 +34,21 @@
   </form>
 </div>
 
+<div *ngIf="news$ | async as articles; else waiting">
+  <h2>News</h2>
+
+  <div *ngFor="let a of articles">
+    <h2>{{ a.title }}</h2>
+    <h5>{{ a.author }}</h5>
+    <p>
+      <img [src]="a.urlToImage">
+      <br>
+      {{ a.content }}
+    </p>
+  </div>
+
+</div>
+
 <ng-template #waiting>
   <h1>Please Wait</h1>
 </ng-template>

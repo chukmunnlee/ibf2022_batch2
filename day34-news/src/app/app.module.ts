@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
+import { NewsService } from './services/news.service';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule, ReactiveFormsModule, HttpClientModule
   ],
-  providers: [],
+  providers: [ NewsService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CATEGORIES, COUNTRIES, COUNTRIES_API } from './constants';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Country } from './models';
+import { Article, Country } from './models';
 import { Observable, filter, map, tap } from 'rxjs';
+import { NewsService } from './services/news.service';
 
 
 @Component({
@@ -18,23 +19,28 @@ export class AppComponent implements OnInit {
   countryList: Country[] = []
 
   country$!: Observable<Country[]>
+  news$!: Promise<Article[]>
+
   flag = ''
 
   readonly countries = COUNTRIES
   readonly categories = CATEGORIES
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private http: HttpClient
+      , private newsSvc: NewsService) { }
 
   ngOnInit(): void {
     this.newsForm = this.createSearchForm()
-    this.country$ = this.getCountries()
+    this.country$ = this.newsSvc.getCountries()
         .pipe(
           tap( v => this.countryList = v),
         )
   }
 
   getNews() {
-
+    const country = this.newsForm.value['country']
+    const category = this.newsForm.value['category']
+    this.news$ = this.newsSvc.getNews(country, category)
   }
 
   onSelectedCountry(event: any) {
@@ -42,23 +48,6 @@ export class AppComponent implements OnInit {
     const c = this.countryList.find(v => v.code == code)
     // @ts-ignore
     this.flag = c?.flag
-  }
-
-  private getCountries(): Observable<Country[]> {
-    const csv = this.countries.join(',')
-    const params = new HttpParams().set('codes', csv)
-    return this.http.get<Country[]>(COUNTRIES_API, { params })
-        .pipe(
-          map((v: any[]) => {
-            return v.map(c => {
-              return {
-                name: c['name']['common'],
-                code: c['cca2'].toLowerCase(),
-                flag: c['flag']
-              } as Country
-            })
-          })
-        )
   }
 
   private createSearchForm(): FormGroup {
